@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian.index');
         Route::get('/pembelian/create',[PembelianController::class,'create'])->name('pembelian.create');
         Route::post('/pembelian', [PembelianController::class,'store'])->name('pembelian.store');
+        Route::get('/pembelian/rekap', [PembelianController::class, 'rekap'])->name('pembelian.rekap');
+        Route::get('/pembelian/download', [PembelianController::class, 'download'])->name('pembelian.download');
+
 
         Route::get('/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -37,7 +40,7 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
         Route::delete('/barang/{barang}', [BarangController::class, 'destroy'])->name('barang.delete');
         Route::get('/api/barang/{kode}', [BarangController::class, 'getByKode']);
-
+        Route::post('barang/import', [BarangController::class, 'import'])->name('barang.import');
     });
    
     

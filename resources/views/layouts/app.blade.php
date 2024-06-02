@@ -194,9 +194,6 @@
                     <li><a class="has-arrow" href="{{route('pembelian.index')}}" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">Pembelian Barang</span></a>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-app-store"></i><span class="nav-text">Rekap Pembelian</span></a>
-                    </li>
                 </ul>
             </div>
 

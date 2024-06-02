@@ -91,4 +91,24 @@ class BarangController extends Controller
 
         return Redirect::back();
     }
+    
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $csvData = file_get_contents($file);
+        $rows = array_map("str_getcsv", explode("\n", $csvData));
+        $header = array_shift($rows);
+
+        foreach ($rows as $row) {
+            if (count($row) == 3) {
+                Barang::create([
+                    'kode_barang' => $row[0],
+                    'nama_barang' => $row[1],
+                    'satuan' => $row[2],
+                ]);
+            }
+        }
+
+        return redirect()->route('barang.index')->with('success', 'Data barang berhasil diimpor.');
+    }
 }

@@ -22,6 +22,14 @@
                     <div class="col-lg-6"><a href="{{route('barang.create')}}"><div class="btn btn-primary">+Tambah Barang</div></a></div>
                     </div>
                 </div>
+                <form action="{{ route('barang.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="file">Import Data Barang (CSV)</label>
+                        <input type="file" name="file" class="form-control" required>
+                        <button type="submit" class="btn btn-success">Import</button>
+                    </div>
+                </form>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered verticle-middle table-responsive-sm">
