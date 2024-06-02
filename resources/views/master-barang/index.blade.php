@@ -8,15 +8,15 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                     @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
                 <div class="card-header">
                     <div class="row">
                     <div class="col-lg-6"><a href="{{route('barang.create')}}"><div class="btn btn-primary">+Tambah Barang</div></a></div>
@@ -53,6 +53,7 @@
                                        
                                         <form action="{{route('barang.delete', $item)}}" method="POST">
                                             @csrf
+                                            @method('delete')
                                             <button><i
                                                 class="fa fa-close color-danger"></i></button>
                                             {{-- <a href="" data-toggle="tooltip"
