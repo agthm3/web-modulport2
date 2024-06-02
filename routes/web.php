@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::get('/barang', [BarangController::class], 'index')->name('barang.index');
+Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

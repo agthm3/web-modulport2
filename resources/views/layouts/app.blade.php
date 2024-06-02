@@ -183,7 +183,7 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">Master User</span></a>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                    <li><a class="has-arrow" href="{{route("barang.index")}}" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">Master Barang</span></a>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
