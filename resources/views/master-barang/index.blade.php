@@ -9,7 +9,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Bordered Table</h4>
+                    <div class="row">
+                    <div class="col-lg-6"><a href="{{route('barang.create')}}"><div class="btn btn-primary">+Tambah Barang</div></a></div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -25,38 +27,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Air Conditioner</td>
-                                    <td>
-                                        <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                            <div class="progress-bar bg-primary" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Apr 20,2018</td>
-                                    <td><span class="badge badge-primary">70%</span>
-                                    </td>
-                                    <td>
-                                        <span>
-                                            <a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                                data-placement="top" title="Edit"><i
-                                                    class="fa fa-pencil color-muted"></i> </a>
-                                            <a href="javascript:void()" data-toggle="tooltip"
-                                                data-placement="top" title="Close"><i
-                                                    class="fa fa-close color-danger"></i></a>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span>
-                                            <a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                                data-placement="top" title="Edit"><i
-                                                    class="fa fa-pencil color-muted"></i> </a>
-                                            <a href="javascript:void()" data-toggle="tooltip"
-                                                data-placement="top" title="Close"><i
-                                                    class="fa fa-close color-danger"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
+                               @foreach ($allBarang as $item)
+                               <tr>
+                                <td>{{$item->kode_barang}}</td>
+                                <td>
+                                  {{$item->nama_barang}}
+                                </td>
+                                <td>{{$item->satuan}}</td>
+                                <td>{{$item->qty}}
+                                </td>
+                                <td>
+                                    {{$item->harga}}
+                                </td>
+                                <td>
+                                    <span>
+                                        <a href="javascript:void()" class="mr-4" data-toggle="tooltip"
+                                            data-placement="top" title="Edit"><i
+                                                class="fa fa-pencil color-muted"></i> </a>
+                                        <a href="javascript:void()" data-toggle="tooltip"
+                                            data-placement="top" title="Close"><i
+                                                class="fa fa-close color-danger"></i></a>
+                                    </span>
+                                </td>
+                            </tr>
+                               @endforeach
                             </tbody>
                         </table>
                     </div>

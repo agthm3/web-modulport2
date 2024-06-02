@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BarangController extends Controller
 {
@@ -12,7 +13,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        return view('master-barang.index');
+        $allBarang= Barang::all();
+        return view('master-barang.index', compact('allBarang'));
     }
 
     /**
@@ -20,7 +22,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('master-barang.create');
     }
 
     /**
@@ -28,7 +30,23 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_barang'=> 'required|max:255',
+            'nama_barang'=> 'required|max:255|string',
+            'satuan'=> 'required|max:255',
+            'qty'=> 'required|numeric',
+            'harga'=> 'required|numeric'
+        ]);
+
+        Barang::create([
+            'kode_barang' => $request->kode_barang,
+            'nama_barang' => $request->nama_barang,
+            'satuan' => $request->satuan,
+            'qty' => $request->qty,
+            'harga' => $request->harga,
+        ]);
+
+        return Redirect::route('barang.index');
     }
 
     /**
