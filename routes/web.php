@@ -16,14 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
+
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/', function () {
+        return view('layouts.app')->name('dashboard');
+    });
+ 
+    Route::middleware(['admin'])->group(function(){
+        Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+        Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
+        Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
+        Route::delete('/barang/{barang}', [BarangController::class, 'destroy'])->name('barang.delete');
+    });
+   
+    
 });
 
-Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
-Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
-Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
-Route::delete('/barang/{barang}', [BarangController::class, 'destroy'])->name('barang.delete');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
