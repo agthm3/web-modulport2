@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class BarangController extends Controller
@@ -91,24 +93,44 @@ class BarangController extends Controller
 
         return Redirect::back();
     }
-    
+
     public function import(Request $request)
     {
         $file = $request->file('file');
-        $csvData = file_get_contents($file);
-        $rows = array_map("str_getcsv", explode("\n", $csvData));
-        $header = array_shift($rows);
-
-        foreach ($rows as $row) {
-            if (count($row) == 3) {
-                Barang::create([
-                    'kode_barang' => $row[0],
-                    'nama_barang' => $row[1],
-                    'satuan' => $row[2],
-                ]);
+        if ($file->isValid()) {
+            $csvData = file_get_contents($file->getRealPath());
+            $rows = array_map(function ($item) { return str_getcsv($item, ';'); }, explode("\n", $csvData));
+            $header = array_shift($rows);  // Remove and use the first row as header
+    
+            foreach ($rows as $row) {
+                if (count($row) === count($header)) {
+                    $data = array_combine($header, $row);
+                    $validator = Validator::make($data, [
+                        'Kode Barang' => 'required|max:255',
+                        'Nama Barang' => 'required|max:255|string',
+                        'Satuan' => 'required|max:255',
+                        'Qty' => 'required|numeric',
+                        'Harga' => 'required|numeric'
+                    ]);
+    
+                    if ($validator->fails()) {
+                        // You can collect all errors or stop at the first one
+                        Log::error('Validation error: ', $validator->errors()->toArray());
+                        continue;  // Skip the erroneous data row or return an error message
+                    }
+    
+                    Barang::create([
+                        'kode_barang' => $data['Kode Barang'],
+                        'nama_barang' => $data['Nama Barang'],
+                        'satuan' => $data['Satuan'],
+                        'qty' => $data['Qty'],
+                        'harga' => $data['Harga']
+                    ]);
+                }
             }
+            return redirect()->route('barang.index')->with('success', 'Data barang berhasil diimpor.');
         }
-
-        return redirect()->route('barang.index')->with('success', 'Data barang berhasil diimpor.');
+        return back()->withErrors('Invalid file uploaded.');
     }
+
 }

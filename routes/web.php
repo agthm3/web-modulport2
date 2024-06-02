@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
         Route::delete('/barang/{barang}', [BarangController::class, 'destroy'])->name('barang.delete');
         Route::get('/api/barang/{kode}', [BarangController::class, 'getByKode']);
-        Route::post('barang/import', [BarangController::class, 'import'])->name('barang.import');
+        Route::post('/barang/import', [BarangController::class, 'import'])->name('barang.import');
     });
    
     
