@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Pembelian;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -91,23 +93,21 @@ class PembelianController extends Controller
     }
     public function rekap(Request $request)
     {
-        $startDate = Carbon::parse('2024-06-13')->startOfDay();
-        $endDate = Carbon::parse('2024-06-14')->endOfDay();
         Log::info('Received start date: ' . $request->start_date);
         Log::info('Received end date: ' . $request->end_date);
-        
-        
+    
         $startDate = Carbon::parse($request->start_date)->startOfDay();
         $endDate = Carbon::parse($request->end_date)->endOfDay();
-        
+    
         Log::info('Processed start date: ' . $startDate);
         Log::info('Processed end date: ' . $endDate);
-        
+    
         $purchases = Pembelian::where('tanggal', '>=', $startDate)
-                                  ->where('tanggal', '<=', $endDate)
-                                  ->get();
+                              ->where('tanggal', '<=', $endDate)
+                              ->get();
     
         Log::info('Number of purchases retrieved: ' . $purchases->count());
+    
         return view('master-pembelian.final', compact('purchases'));
     }
     
@@ -123,7 +123,7 @@ class PembelianController extends Controller
                     ->get();
     
         // Pastikan menggunakan Facade untuk PDF::loadView
-        $pdf = PDF::loadView('final.rekap', compact('purchases'));
+        $pdf = FacadePdf::loadView('master-pembelian.final', compact('purchases'));
         return $pdf->download('rekap-pembelian.pdf');
     }
 
