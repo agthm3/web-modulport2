@@ -78,6 +78,8 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        $barang->delete();
+
+        return Redirect::back();
     }
 }

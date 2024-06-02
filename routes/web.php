@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
-
+use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +22,8 @@ Route::get('/', function () {
 
 Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
-Route::post('/barang/store', [BarangController::class, 'store'])->name('barang.store');
+Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
+Route::delete('/barang/{$item}', [BarangController::class, 'destroy'])->name('barang.delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

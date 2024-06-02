@@ -8,6 +8,15 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="card-header">
                     <div class="row">
                     <div class="col-lg-6"><a href="{{route('barang.create')}}"><div class="btn btn-primary">+Tambah Barang</div></a></div>
@@ -41,12 +50,14 @@
                                 </td>
                                 <td>
                                     <span>
-                                        <a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                            data-placement="top" title="Edit"><i
-                                                class="fa fa-pencil color-muted"></i> </a>
-                                        <a href="javascript:void()" data-toggle="tooltip"
-                                            data-placement="top" title="Close"><i
-                                                class="fa fa-close color-danger"></i></a>
+                                       
+                                        <form action="{{route('barang.delete', $item)}}" method="POST">
+                                            @csrf
+                                            <button><i
+                                                class="fa fa-close color-danger"></i></button>
+                                            {{-- <a href="" data-toggle="tooltip"
+                                            data-placement="top" title="Close"></a> --}}
+                                        </form>
                                     </span>
                                 </td>
                             </tr>
