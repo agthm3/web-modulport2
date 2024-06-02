@@ -177,9 +177,9 @@
                 <ul class="metismenu" id="menu">
      
                    
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                    {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">Dashboard</span></a>
-                    </li>
+                    </li> --}}
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">Master User</span></a>
                     </li>
@@ -193,27 +193,7 @@
                                 class="icon icon-app-store"></i><span class="nav-text">Rekap Pembelian</span></a>
                     </li>
                 
-              
-
-                    <li class="nav-label">Forms</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-form"></i><span class="nav-text">Forms</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="./form-element.html">Form Elements</a></li>
-                            <li><a href="./form-wizard.html">Wizard</a></li>
-                            <li><a href="./form-editor-summernote.html">Summernote</a></li>
-                            <li><a href="form-pickers.html">Pickers</a></li>
-                            <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Table</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-layout-25"></i><span class="nav-text">Table</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                            <li><a href="table-datatable-basic.html">Datatable</a></li>
-                        </ul>
-                    </li>
+            
 
                     <li class="nav-label">Extra</li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -259,8 +239,8 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
-                <p>Distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a></p> 
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">PT GISTEX</a> 2024</p>
+
             </div>
         </div>
         <!--**********************************
