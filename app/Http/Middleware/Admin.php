@@ -17,7 +17,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check() || Auth::user()->is_admin == false) {
+        if (!Auth::check() || !Auth::user()->role == 'Admin') {
            return Redirect::route('dashboard');
         }
         return $next($request);
