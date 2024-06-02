@@ -11,6 +11,15 @@ class BarangController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getByKode($kode)
+    {
+        $barang = Barang::where('kode_barang', $kode)->first();
+        if (!$barang) {
+            return response()->json(['message' => 'Barang tidak ditemukan'], 404);
+        }
+        return response()->json($barang);
+    }
+
     public function index()
     {
         $allBarang= Barang::all();

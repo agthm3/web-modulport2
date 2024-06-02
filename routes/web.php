@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\RouteRegistrar;
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::middleware(['admin'])->group(function(){
+        Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian.index');
+        Route::get('/pembelian/create',[PembelianController::class,'create'])->name('pembelian.create');
+        Route::post('/pembelian', [PembelianController::class,'store'])->name('pembelian.store');
+
         Route::get('/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
         Route::post('/user', [UserController::class, 'store'])->name('user.register');
@@ -31,6 +36,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
         Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
         Route::delete('/barang/{barang}', [BarangController::class, 'destroy'])->name('barang.delete');
+        Route::get('/api/barang/{kode}', [BarangController::class, 'getByKode']);
+
     });
    
     
