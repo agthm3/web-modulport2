@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Route;
@@ -19,10 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/', function () {
-        return view('layouts.app')->name('dashboard');
-    });
- 
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::middleware(['admin'])->group(function(){
         Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
         Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
@@ -35,9 +33,6 @@ Route::middleware(['auth'])->group(function(){
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
